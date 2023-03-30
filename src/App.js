@@ -4,8 +4,16 @@ import React, { useEffect } from 'react';
 import { createUserFromUID, getUserFromUID } from "./Controller.js";
 import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
+import { useNavigate} from 'react-router-dom';
 
 function App() {
+
+  const navigation= useNavigate();
+
+  function handleNavigation(){
+    navigation ('/PlayerPage')
+  }
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -196,7 +204,7 @@ function App() {
               <div className="content">
                 <h3>Already have an account?</h3>
                 <p>Great to see you again! Please log in to your Account to get started</p>
-                <button className="btn transparent" id="sign-in-btn">Sign in</button>
+                <button className="btn transparent" id="sign-in-btn" onClick={handleNavigation}>Sign in</button>
               </div>
               <img src="img/register.svg" className="image" alt="" />
             </div>
