@@ -4,15 +4,16 @@ import React, { useEffect } from 'react';
 import { createUserFromUID, getUserFromUID } from "./Controller.js";
 import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
-import { useNavigate} from 'react-router-dom';
+import { BrowserRouter, useNavigate} from 'react-router-dom';
 import {Routes, Route, useNavigate} from 'react-router-dom';
+import secondpage from "./SecondPage/PlayerPage";
 
 function App() {
 
   const navigate= useNavigate();
 
   const handleNavigation =() => {
-    navigate ('/PlayerPage');
+    navigate ('./PlayerPage');
   }
 
   const [formData, setFormData] = useState({
@@ -207,9 +208,11 @@ function App() {
                 <p>Great to see you again! Please log in to your Account to get started</p>
                 <button className="btn transparent" id="sign-in-btn" onClick={handleNavigation}>Sign in</button>
 
+                <BrowserRouter>
                 <Routes>
                   <Route path="/PlayerPage" element={<PlayerPageRoute/>} />
                 </Routes>
+                </BrowserRouter>
 
               </div>
               <img src="img/register.svg" className="image" alt="" />
