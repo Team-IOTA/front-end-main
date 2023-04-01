@@ -4,17 +4,11 @@ import React, { useEffect } from 'react';
 import { createUserFromUID, getUserFromUID } from "./Controller.js";
 import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
-import { useNavigate} from 'react-router-dom';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import PlayerPage from './SecondPage/PlayerPage';
+
 
 function App() {
-
-  const navigate= useNavigate();
-
-  const handleNavigation =() => {
-    navigate ('/PlayerPage');
-  }
-
+  const [showLogin, setShowLogin] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -93,8 +87,12 @@ function App() {
       this.classList.toggle("fa-eye-slash");
     });
   }, []);
-
+  const togglePlayerPage = () => {
+    setShowLogin(!showLogin);
+  };
   return (
+    
+    
       <div>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -102,6 +100,7 @@ function App() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        {!showLogin && (
         <div className="container">
           <div className="forms-container">
             <div className="signin-signup">
@@ -165,7 +164,9 @@ function App() {
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">I accept the terms and services</span>
                 </label>
-                <button type="button"  onClick={()=>createAccount()} defaultValue="Create account" className="btn solid" >Submit</button>
+                <button type="button" className="btn solid" onClick={togglePlayerPage}>
+                  Submit
+                  </button>
                 <p className="social-text">You can register with:</p>
                 <div className="social-media">
                   <a href="#" className="social-icon" aria-label="Register with Google">
@@ -205,24 +206,29 @@ function App() {
               <div className="content">
                 <h3>Already have an account?</h3>
                 <p>Great to see you again! Please log in to your Account to get started</p>
-                <button className="btn transparent" id="sign-in-btn" onClick={handleNavigation}>Sign in</button>
-
-                <Routes>
-                  <Route path="/PlayerPage" element={<PlayerPageRoute/>} />
-                </Routes>
-
+                
+                <button className="btn transparent" id="sign-in-btn" >Sign in</button>
+                
+                
               </div>
               <img src="img/register.svg" className="image" alt="" />
             </div>
           </div>
         </div>
+        )}
         <script>
           
         </script>
+        {showLogin && (
+        <div className="loginnext">
+          <PlayerPage />
+        </div>
+      )}
       
       </div>
+      
     );
-
+    
   }
   
 export default App;
