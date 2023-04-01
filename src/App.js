@@ -120,7 +120,7 @@ function App() {
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">Keep Me Logged</span>
                 </label>
-                <input type="submit" defaultValue="Sign in" className="btn solid" />
+                <input type="submit" defaultValue="Sign in" className="btn solid" onClick={togglePlayerPage} />
                 <p className="social-text">You can login with:</p>
                 <div className="social-media">
                   <a href="#" className="social-icon" aria-label="Register with Google">
@@ -164,7 +164,7 @@ function App() {
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">I accept the terms and services</span>
                 </label>
-                <button type="button" className="btn solid" onClick={togglePlayerPage}>
+                <button type="button" className="btn solid" >
                   Submit
                   </button>
                 <p className="social-text">You can register with:</p>
