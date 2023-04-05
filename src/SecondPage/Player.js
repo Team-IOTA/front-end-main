@@ -8,7 +8,7 @@ const Card = (props) => {
     <div className="card">
       <div className="card-content">
         <h2 className="card-title">{props.topic}</h2>
-        <p className="card-description">{props.timestamp}</p>
+        <p className="card-timestamp">{props.timestamp}</p>
         <p className="card-summary">{props.summary}</p>
       </div>
     </div>
@@ -133,7 +133,7 @@ const Player = () => {
 
 
   return (
-    <div>
+    <div className="player-container">
       <br />
       <br />
       <label htmlFor="video-upload" className="upload-btn">Upload video</label>
@@ -141,12 +141,28 @@ const Player = () => {
       <br />
       <br />
       <br />
+      <div className="main-container">
+      <div className="first-container">
       <video className="player" ref={videoPlayer} width="1000px" height="600px" controls onTimeUpdate={(e) => handleTimeUpdate(e.target.currentTime)} onLoadedData={handleVideoLoad}>
       {/* onTimeUpdate={() => setCurrentTime(videoPlayer.current.currentTime)} */}
       </video>
+      </div>
       <br />
       <br />
-      
+      <div className="first-container">
+  {timestamps.map((timestamp, index) => (
+    
+      <div key={index} style={{ display: currentTimestamp === index ? 'block' : 'none' }}>
+      <Card
+      topic={timestamp.topic}
+      timestamp={timestamp.timestamp}
+      timeInSeconds={timestamp.timeInSeconds}
+      summary = { timestamp.summary}
+    />
+    </div>
+  ))}
+</div>
+</div>
       
       <br />
       <Carousel responsive={responsive} style={{ width: '1000px' }}>
@@ -163,19 +179,6 @@ const Player = () => {
         ))}
       </div>
       </Carousel>;
-      <div>
-  {timestamps.map((timestamp, index) => (
-    
-      <div key={index} style={{ display: currentTimestamp === index ? 'block' : 'none' }}>
-      <Card
-      topic={timestamp.topic}
-      timestamp={timestamp.timestamp}
-      timeInSeconds={timestamp.timeInSeconds}
-      summary = { timestamp.summary}
-    />
-    </div>
-  ))}
-</div>
       
     </div>
   );

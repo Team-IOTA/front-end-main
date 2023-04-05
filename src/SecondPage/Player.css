@@ -16,27 +16,12 @@
     margin-left: 700px;
   }
   
-  /* .timestamp {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .timestamp img {
-    width: 100px;
-    height: 50px;
-    border: 2px solid black;
-    margin-right: 10px;
-    background-color: rgb(255, 255, 255);
-    margin-top: 30px;
-    margin-left: 20px;
-  } */
-
-
   .timestamp-container {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     margin-top: 20px;
+    padding-left: 16px;
   }
   
   .timestamp-item {
@@ -48,13 +33,11 @@
   }
   
   .timestamp-item img {
-    /* width: 150px;
-    height: 150px; */
     object-fit: cover;
     cursor: pointer;
     width: 100px;
     height: 50px;
-    border: 2px solid black;
+    border: 2px solid rgb(140, 136, 136);
     margin-right: 10px;
     background-color: rgb(255, 255, 255);
     margin-top: 30px;
@@ -76,17 +59,6 @@
     font-size: 14px;
     color: #777;
   }
-  
-#btn-go{
-  background-color: #4d84e2;
-  border: none; 
-  color: white; 
-  padding: 12px 12px;
-  text-align: center; 
-  text-decoration: none; 
-  font-size: 16px; 
-  border-radius: 25px;
-}
 
 .input-time {
   padding: 6px 10px;
@@ -96,41 +68,45 @@
 }
 
 .card {
+  background-color: #4d84e2;
+  margin-bottom: 60px;
+  /* padding: 10px; */
+  margin: 10px;
+  border: 1px solid #4d84e2;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 480px;
+  height: 600px;
+  padding-left: 20px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-topic {
+  color: white;
+}
+
+.card-timestamp {
+  color: white;
+}
+
+.players{
   display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin: 1rem;
+  justify-content:space-between;
 }
 
-.card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px 8px 0 0;
-}
-
-.card-content {
-  padding: 1rem;
-}
-
-.card-title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.card-description {
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
-}
-
-.card-link {
-  color: #0077cc;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.cards {
+.main-container{
   display: flex;
-  flex-wrap: wrap
+}
+
+.fisrt-container{
+  flex: 1;
+}
+
+.fisrt-container:first-child{
+margin-right: 20px;
 }

@@ -8,14 +8,11 @@ function PlayerPage() {
   return (
     
     <div className="PlayerPage">
-      <header className="Playerpage-header">
+      <header>
         <div className="playerpage-container">
-          <div className="playerpage-image">
             <Player/>
           </div>
-        <br/>
-        <br/>
-        </div>
+        
       </header>
     </div>
     
