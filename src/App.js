@@ -1,11 +1,10 @@
 
 import './App.css';
 import React, { useEffect } from 'react';
-import { createUserFromUID, getUserFromUID } from "./Controller.js";
+import { createUserFromUID, getUserFromUID, logUser } from "./Controller.js";
 import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
 import PlayerPage from './SecondPage/PlayerPage';
-
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -14,7 +13,9 @@ function App() {
     password: "",
     username:"",
   });
+  
   const [name, setName] = useState("");
+  
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -23,17 +24,49 @@ function App() {
     const userId="UID"+Math.floor(Date.now() / 1000)
     const objectId =uuidv4()
     createUserFromUID(formData.username,formData.email,formData.password,objectId,userId);
+    if(formData.email!=""&&formData.username!=""&&formData.password!=""){
+      setShowLogin(!showLogin); 
+
+    }else{
+      setError2(true)
+     
+    }
     setFormData({
       email: "",
       password: "",
       username:"",
     })
+  }
+  const [error1,setError]=useState(false)
+  const [error2,setError2]=useState(false)
+    function loggedIn(){
+
+      let res=logUser(formData.username,formData.password);
+      res.then(
+        r=>{
+          if(r.login==true){
+            setShowLogin(!showLogin);  
+            console.log("yes")
+         
+
+          }else{
+            console.log("no")
+            setError(true)
+          }
+        }
+        
+        );
+      setFormData({
+        password: "",
+        username:"",
+      })
+    
 
   }
+
   useEffect(() => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
     const sign_up_btn = document.querySelector("#sign-up-btn");
-    
     const container = document.querySelector(".container");
    /*   const [post,setPost] = useState({ username:' ',password:' ' , email:' ' })   
      const handleInput=(event)=>{ 
@@ -87,12 +120,9 @@ function App() {
       this.classList.toggle("fa-eye-slash");
     });
   }, []);
-  const togglePlayerPage = () => {
-    setShowLogin(!showLogin);
-  };
+ 
+
   return (
-    
-    
       <div>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -104,23 +134,31 @@ function App() {
         <div className="container">
           <div className="forms-container">
             <div className="signin-signup">
-              <form action className="sign-in-form">
+              <form action="post" className="sign-in-form">
                 <h2 className="title">Login</h2>
                 <div className="input-field">
                   <i className="fas fa-user" />
-                  <input type="text" name="usuario" autoComplete="username" placeholder="Username" required="yes"  />
+                  <input type="text" name="username" autoComplete="username" placeholder="Username" required="yes" value={formData.username}
+          onChange={handleFormChange} />
                 </div>
                 <div className="input-field">
                   <i className="fas fa-lock" />
-                  <input type="password" name="password" autoComplete="current-password" placeholder="Password" id="id_password" required="yes" />
+                  <input type="password" name="password" autoComplete="current-password" placeholder="Password"  required="yes" value={formData.password}
+          onChange={handleFormChange} />
+                  
                   <i className="far fa-eye" id="togglePassword" style={{cursor: 'pointer'}} />
                 </div>
+                {error1 ? (
+  <label className="errortext">Invalid Username or Password</label>
+) : null}
+
                 <a className="pass" href="#">Forgot your password?</a>
                 <label className="check">
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">Keep Me Logged</span>
                 </label>
-                <input type="submit" defaultValue="Sign in" className="btn solid" onClick={togglePlayerPage} />
+                <input type="submit" defaultValue="Sign in" onClick={()=>loggedIn()} className="btn solid" />
+                
                 <p className="social-text">You can login with:</p>
                 <div className="social-media">
                   <a href="#" className="social-icon" aria-label="Register with Google">
@@ -160,13 +198,14 @@ function App() {
           onChange={handleFormChange} />
                   <i className="far fa-eye" id="toggleReg" style={{cursor: 'pointer'}} />
                 </div>
+                {error2 ? (
+  <label className="errortext2">Fill in all the Required fields</label>
+) : null}
                 <label className="check">
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">I accept the terms and services</span>
                 </label>
-                <button type="button" className="btn solid" >
-                  Submit
-                  </button>
+                <button type="button"  onClick={()=>createAccount()} defaultValue="Create account" className="btn solid" >Submit</button>
                 <p className="social-text">You can register with:</p>
                 <div className="social-media">
                   <a href="#" className="social-icon" aria-label="Register with Google">
@@ -206,29 +245,23 @@ function App() {
               <div className="content">
                 <h3>Already have an account?</h3>
                 <p>Great to see you again! Please log in to your Account to get started</p>
-                
-                <button className="btn transparent" id="sign-in-btn" >Sign in</button>
-                
-                
+                <button className="btn transparent"  id="sign-in-btn">Sign in</button>
               </div>
               <img src="img/register.svg" className="image" alt="" />
             </div>
           </div>
-        </div>
-        )}
+        </div>)}
         <script>
-          
+      
         </script>
         {showLogin && (
         <div className="loginnext">
           <PlayerPage />
         </div>
       )}
-      
       </div>
-      
     );
-    
+
   }
   
 export default App;
