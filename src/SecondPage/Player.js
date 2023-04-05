@@ -1,24 +1,56 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import './Player.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+const Card = (props) => {
+  return (
+    <div className="card">
+      <div className="card-content">
+        <h2 className="card-title">{props.topic}</h2>
+        <p className="card-description">{props.timestamp}</p>
+        <p className="card-summary">{props.summary}</p>
+      </div>
+    </div>
+  );
+};
+
 
 const timestamps = [
   {
     image: "https://via.placeholder.com/150",
-    timestamp: "00:00:20",
+    timestamp: "00:00:10",
     topic: "Introduction",
-    timeInSeconds: 20
+    timeInSeconds: 10,
+    summary: "Introduction"
   },
   {
     image: "https://via.placeholder.com/150",
-    timestamp: "00:00:23",
+    timestamp: "00:00:15",
     topic: "Chapter 1",
-    timeInSeconds: 23
+    timeInSeconds: 15,
+    summary: "Introduction 1"
   },
   {
     image: "https://via.placeholder.com/150",
-    timestamp: "00:02:10",
+    timestamp: "00:00:20",
     topic: "Chapter 2",
-    timeInSeconds: 130
+    timeInSeconds: 20,
+    summary: "Introduction 2"
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    timestamp: "00:00:25",
+    topic: "Conclusion",
+    timeInSeconds: 25,
+    summary: "Introduction 3"
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    timestamp: "00:00:30",
+    topic: "Conclusion",
+    timeInSeconds: 30,
+    summary: "Introduction 4"
   },
   {
     image: "https://via.placeholder.com/150",
@@ -26,44 +58,39 @@ const timestamps = [
     topic: "Conclusion",
     timeInSeconds: 225
   },
+  {
+    image: "https://via.placeholder.com/150",
+    timestamp: "00:03:45",
+    topic: "Conclusion",
+    timeInSeconds: 225
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    timestamp: "00:03:45",
+    topic: "Conclusion",
+    timeInSeconds: 225
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    timestamp: "00:03:45",
+    topic: "Conclusion",
+    timeInSeconds: 225
+  }
 ];
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [seekTime, setSeekTime] = useState(0);
+  const [currentTimestamp, setCurrentTimestamp] = useState(0);
   const videoPlayer = useRef(null);
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      videoPlayer.current.pause();
-    } else {
-      videoPlayer.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const handleSeek = () => {
-    videoPlayer.current.currentTime = seekTime;
-};
-
-  const handleTimeInputChange = (e) => {
-    const timeInSeconds = e.target.value;
-    setCurrentTime(timeInSeconds);
-    videoPlayer.current.currentTime = timeInSeconds;
-  };
 
   const handleTimeClick = (timeInSeconds) => {
     setCurrentTime(timeInSeconds);
     videoPlayer.current.currentTime = timeInSeconds;
   };
 
-  const formatTime = (timeInSeconds) => {
-    const date = new Date(null);
-    date.setSeconds(timeInSeconds);
-    return date.toISOString().substr(11, 8);
-  };
 
   const handleVideoLoad = () => {
     setVideoDuration(videoPlayer.current.duration);
@@ -77,6 +104,34 @@ const Player = () => {
     }
   }
 
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
+
+    
+    const handleTimeUpdate = (currentTime) => {
+      const newTimestamp = timestamps.findIndex(
+        (timestamp) => timestamp.timeInSeconds > currentTime
+      );
+      setCurrentTimestamp(newTimestamp === -1 ? timestamps.length - 1 : newTimestamp);
+    };
+
+
   return (
     <div>
       <br />
@@ -86,19 +141,16 @@ const Player = () => {
       <br />
       <br />
       <br />
-      <video className="player" ref={videoPlayer} width="1000px" height="600px" controls onTimeUpdate={() => setCurrentTime(videoPlayer.current.currentTime)} onLoadedData={handleVideoLoad}>
-        {/* <source src={v} type="video/mp4" /> */}
+      <video className="player" ref={videoPlayer} width="1000px" height="600px" controls onTimeUpdate={(e) => handleTimeUpdate(e.target.currentTime)} onLoadedData={handleVideoLoad}>
+      {/* onTimeUpdate={() => setCurrentTime(videoPlayer.current.currentTime)} */}
       </video>
       <br />
       <br />
-      <input type="range" min={0} max={videoDuration} value={currentTime} step={1} onChange={handleTimeInputChange} />
+      
+      
       <br />
-      <br />
-      <label htmlFor="seek-input">Seek to time:</label>
-      <input className='input-time' type="number" id="seek-input" value={seekTime} onChange={e => setSeekTime(e.target.value)} min="0" max={videoPlayer.current && videoPlayer.current.duration} step="any" />
-      <button id='btn-go' onClick={handleSeek}>Go</button>
-      <br />
-      <div className="timestamp-container">
+      <Carousel responsive={responsive} style={{ width: '1000px' }}>
+      <div className="timestamp-container" style={{ width: '1000px' }}>
         {timestamps.map((timestamp) => (
           <div className="timestamp-item" key={timestamp.timestamp}>
             
@@ -110,6 +162,21 @@ const Player = () => {
           </div>
         ))}
       </div>
+      </Carousel>;
+      <div>
+  {timestamps.map((timestamp, index) => (
+    
+      <div key={index} style={{ display: currentTimestamp === index ? 'block' : 'none' }}>
+      <Card
+      topic={timestamp.topic}
+      timestamp={timestamp.timestamp}
+      timeInSeconds={timestamp.timeInSeconds}
+      summary = { timestamp.summary}
+    />
+    </div>
+  ))}
+</div>
+      
     </div>
   );
 };
