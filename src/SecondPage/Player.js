@@ -2,6 +2,8 @@ import React, { useState, useRef,useEffect } from 'react';
 import './Player.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import Loader from "react-loader-spinner";
+
 
 const Card = (props) => {
   return (
