@@ -170,9 +170,10 @@ const Player = () => {
     <div class="file-upload">
       <input id="video-upload" type="file" accept="video/*" onChange={handleFileChange} />
       <i class="fa fa-arrow-up"></i>
-      {isLoading && <Loader />}
+      
     </div>
   </label>
+  {isLoading && <Loader />}
 </div>
   
       <Carousel responsive={responsive} style={{ width: '1000px' }}>
