@@ -83,6 +83,7 @@ const Player = () => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentTimestamp, setCurrentTimestamp] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const videoPlayer = useRef(null);
 
 
@@ -92,17 +93,19 @@ const Player = () => {
   };
 
 
-  const handleVideoLoad = () => {
-    setVideoDuration(videoPlayer.current.duration);
-  };
-
   function handleFileChange(event) {
     const filePath = event.target.files[0];
     if (filePath) {
+      setIsLoading(true);
       const file = URL.createObjectURL(filePath);
       videoPlayer.current.src = file;
     }
   }
+
+  const handleVideoLoad = () => {
+    setIsLoading(false);
+    setVideoDuration(videoPlayer.current.duration);
+  };
 
   const responsive = {
     superLargeDesktop: {
@@ -165,6 +168,7 @@ const Player = () => {
     <div class="file-upload">
       <input id="video-upload" type="file" accept="video/*" onChange={handleFileChange} />
       <i class="fa fa-arrow-up"></i>
+      {isLoading && <Loader />}
     </div>
   </label>
 </div>
