@@ -10,45 +10,28 @@ body {
   margin-top: -30px;
 }
 
-.file-upload{
-  height:100px;
-  width:100px;
-  border-radius: 100px;
-  display:flex;
-  justify-content:center;
-  align-items: center;  
-  border:4px solid #FFFFFF;
-  overflow:hidden;
-  background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
-  background-size: 100% 200%;
-  transition: all 1s;
-  color: #FFFFFF;
-  font-size:100px;
-  margin-left: 1100px;
-  margin-top: -110px;
-
-}
-
-  
-
-input[type='file']{
-
-  height:200px;
-  width:200px;
-  position:absolute;
-  top:0;
-  left:0;
-  opacity:0;
-  cursor:pointer;
-  
-
-}
-.file-upload:hover {
-  background-position: 0 -100%;
-  color: #2590EB;
-}
-
-  
+#video-uploaded {
+    background-color: #4d84e2;
+    border: none; 
+    color: white; 
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 24px;
+    text-align: center; 
+    text-decoration: none; 
+    border-radius: 25px;
+  }
+  #submit-btn {
+    background-color: #4d84e2;
+    border: none; 
+    color: white; 
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px 24px;
+    text-align: center; 
+    text-decoration: none; 
+    border-radius: 25px;
+  }
   .timestamp-container {
     display: flex;
     flex-direction: row;

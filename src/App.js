@@ -70,6 +70,7 @@ function App() {
   const [error2,setError2]=useState(false)
   const [error3,setError3]=useState(false)
   const [error4,setError4]=useState(false)
+  const [error5,setError5]=useState(false)
 
   function loggedIn() {
     if (!formData.username || !formData.password) {
@@ -233,6 +234,9 @@ function App() {
 ) : null}
              {error4 ? (
   <label className="errortext4">Please enter a valid Email Address</label>
+) : null}
+         {error5 ? (
+  <label className="errortext5">Please enter a valid Email Address</label>
 ) : null}
 
                 <label className="check">
