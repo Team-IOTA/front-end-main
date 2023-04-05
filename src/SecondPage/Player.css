@@ -94,3 +94,43 @@
   font-size: 16px; 
   border-radius: 25px;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-description {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.card-link {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap
+}
