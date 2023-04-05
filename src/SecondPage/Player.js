@@ -142,7 +142,7 @@ const Player = () => {
       <br />
       <div className="main-container">
       <div className="first-container">
-      <video className="player" ref={videoPlayer} width="900px" height="600px" controls onTimeUpdate={(e) => handleTimeUpdate(e.target.currentTime)} onLoadedData={handleVideoLoad}>
+      <video className="player" ref={videoPlayer} width="800px" height="450px" controls onTimeUpdate={(e) => handleTimeUpdate(e.target.currentTime)} onLoadedData={handleVideoLoad}>
       {/* onTimeUpdate={() => setCurrentTime(videoPlayer.current.currentTime)} */}
       </video>
       </div>
@@ -169,13 +169,12 @@ const Player = () => {
     <div class="file-upload">
       <input id="video-upload" type="file" accept="video/*" onChange={handleFileChange} />
       <i class="fa fa-arrow-up"></i>
-      
     </div>
   </label>
   {isLoading && <Loader />}
 </div>
   
-      <Carousel responsive={responsive} style={{ width: '1000px' }}>
+      <Carousel responsive={responsive} style={{ width: '1000px' }} >
       <div className="timestamp-container" style={{ width: '1000px' }}>
         {timestamps.map((timestamp) => (
           <div className="timestamp-item" key={timestamp.timestamp}>
