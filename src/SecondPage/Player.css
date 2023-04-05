@@ -1,20 +1,45 @@
-.player{
-    margin-left: 2opx;
+body {
+  background: linear-gradient(to bottom, #04befe, #ffffff);
 }
 
-.upload-btn {
-    background-color: #4d84e2;
-    border: none; 
-    color: white; 
-    padding: 12px 24px;
-    text-align: center; 
-    text-decoration: none; 
-    font-size: 16px; 
-    border-radius: 25px;
-    margin-top:120px ;
-    margin-bottom:20px ;
-    margin-left: 700px;
-  }
+
+
+.player{
+    margin-right: 2opx;
+}
+.file-upload{
+  height:100px;
+  width:100px;
+  border-radius: 100px;
+  display:flex;
+  justify-content:center;
+  align-items: center;  
+  border:4px solid #FFFFFF;
+  overflow:hidden;
+  background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+  background-size: 100% 200%;
+  transition: all 1s;
+  color: #FFFFFF;
+  font-size:100px;
+  margin-left: 650px;
+  
+}
+input[type='file']{
+
+  height:200px;
+  width:200px;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0;
+  cursor:pointer;
+
+}
+.file-upload:hover {
+  background-position: 0 -100%;
+  color: #2590EB;
+}
+
   
   .timestamp-container {
     display: flex;
@@ -68,16 +93,19 @@
 }
 
 .card {
-  background-color: #4d84e2;
-  margin-bottom: 60px;
-  /* padding: 10px; */
-  margin: 10px;
-  border: 1px solid #4d84e2;
-  border-radius: 5px;
-  cursor: pointer;
+  width: 200px;
+  border: 25px solid  #d5dbdb;
+  border-radius: 10px;
+  padding: 40px;
+  margin: auto;
+  background-color:  #d5dbdb;
+  box-shadow: 0 0 2em black;
+  margin-top: 50px;
   width: 480px;
   height: 600px;
-  padding-left: 20px;
+  margin-top: -2px;
+  margin-left: 20px;
+
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 

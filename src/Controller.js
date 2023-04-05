@@ -1,7 +1,7 @@
 export const createUserFromUID = async (username, Email, Password,objectId,userId) => {
     const data = {username, Email, Password,objectId,userId};
     const response = await fetch(
-      `http://localhost:8080/classifie/api/CreateUser`,
+      `http://localhost:8000/classifie/api/CreateUser`,
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -15,7 +15,7 @@ export const createUserFromUID = async (username, Email, Password,objectId,userI
   export const logUser = async (username, Password) => {
     const data = {username, Password};
     const response = await fetch(
-      `http://localhost:8080/classifie/api/Login`,
+      `http://localhost:8000/classifie/api/Login`,
       {
         method: "POST",
         body: JSON.stringify(data),

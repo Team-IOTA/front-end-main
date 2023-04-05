@@ -425,7 +425,7 @@ form.sign-up-form {
 }
 
 .errortext{
-  color: #D8000C;
+  color: #DC0000;
   background-image: url('https://i.imgur.com/GnyDvKN.png');
 			margin: 10px 0px;
 			padding: 15px 10px 15px 50px;
@@ -439,7 +439,16 @@ form.sign-up-form {
 		padding: 15px 10px 15px 50px;
     background-image: url('https://i.imgur.com/Z8q7ww7.png');
   }
-
+  .errortext3, .errortext4 {
+    color: #DC0000;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  
+  
 /* MEDIA SCREEN */
 
 @media (max-width: 870px) {

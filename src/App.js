@@ -20,49 +20,80 @@ function App() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  function createAccount(){
-    const userId="UID"+Math.floor(Date.now() / 1000)
-    const objectId =uuidv4()
-    createUserFromUID(formData.username,formData.email,formData.password,objectId,userId);
-    if(formData.email!=""&&formData.username!=""&&formData.password!=""){
-      setShowLogin(!showLogin); 
-
-    }else{
-      setError2(true)
-     
+  function validateForm() {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_-])(?!.*\s).{8,}$/;
+    const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    
+    if (formData.email === "" || formData.username === "" || formData.password === "") {
+      // required field is empty, display an error message
+      setError2(true);
+      return false;
+    } else {
+      setError2(false);
     }
-    setFormData({
-      email: "",
-      password: "",
-      username:"",
-    })
+    
+    if (!passwordRegex.test(formData.password)) {
+      // password is invalid, display an error message
+      setError3(true);
+      return false;
+    } else {
+      setError3(false);
+    }
+    
+    if (!emailRegex.test(formData.email)) {
+      // email is invalid, display an error message
+      setError4(true);
+      return false;
+    } else {
+      setError4(false);
+    }
+    
+    return true;
   }
+  
+  function createAccount() {
+    const userId = "UID" + Math.floor(Date.now() / 1000);
+    const objectId = uuidv4();
+    
+    if (validateForm()) {
+      createUserFromUID(formData.username, formData.email, formData.password, objectId, userId);
+      setShowLogin(!showLogin);
+      setFormData({
+        email: "",
+        password: "",
+        username: "",
+      });
+    }
+  }
+   
   const [error1,setError]=useState(false)
   const [error2,setError2]=useState(false)
-    function loggedIn(){
+  const [error3,setError3]=useState(false)
+  const [error4,setError4]=useState(false)
 
-      let res=logUser(formData.username,formData.password);
-      res.then(
-        r=>{
-          if(r.login==true){
-            setShowLogin(!showLogin);  
-            console.log("yes")
-         
-
-          }else{
-            console.log("no")
-            setError(true)
-          }
-        }
-        
-        );
-      setFormData({
-        password: "",
-        username:"",
-      })
-    
-
+  function loggedIn() {
+    if (!formData.username || !formData.password) {
+      setError(true);
+      return;
+    }
+  
+    let res = logUser(formData.username, formData.password);
+    res.then(r => {
+      if (r.login == true) {
+        setShowLogin(!showLogin);
+        console.log("yes");
+      } else {
+        console.log("no");
+        setError(true);
+      }
+    });
+  
+    setFormData({
+      password: "",
+      username: "",
+    });
   }
+  
 
   useEffect(() => {
     const sign_in_btn = document.querySelector("#sign-in-btn");
@@ -174,11 +205,7 @@ function App() {
                     <i className="fab fa-facebook-f" aria-label="Register with Facebook" />
                   </a>
                 </div>
-                <div className="social-media">
-                  <a className="icon-mode" onclick="toggleTheme('dark');"><i className="fas fa-moon" /></a>
-                  <a className="icon-mode" onclick="toggleTheme('light');"><i className="fas fa-sun" /></a>
-                </div>
-                <p className="text-mode">Change theme</p>
+    
               </form>
               <form action='POST' className="sign-up-form">
                 <h2 className="title">Register</h2>
@@ -201,6 +228,13 @@ function App() {
                 {error2 ? (
   <label className="errortext2">Fill in all the Required fields</label>
 ) : null}
+ {error3 ? (
+  <label className="errortext3">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</label>
+) : null}
+             {error4 ? (
+  <label className="errortext4">Please enter a valid Email Address</label>
+) : null}
+
                 <label className="check">
                   <input type="checkbox" defaultChecked="checked" />
                   <span className="checkmark">I accept the terms and services</span>
