@@ -61,6 +61,7 @@ const Player = () => {
       setLoad(false)
     }
   }
+  
   const handleFileSelect = (event) => {
     setLoad(true)
     setSelectedFile(event.target.files[0])
@@ -120,7 +121,8 @@ const Player = () => {
       const newTimestamp = offers.findIndex(
         (timestamp) => timestamp.timeInSeconds > currentTime
       );
-      setCurrentTimestamp(newTimestamp === -1 ? offers.length - 1 : newTimestamp);
+      setCurrentTimestamp(newTimestamp === 0 ? offers.length - 1 : newTimestamp);
+      //setCurrentTimestamp(newTimestamp === 0 ? offers.length-1 : newTimestamp);
     };
 
 
@@ -137,17 +139,12 @@ const Player = () => {
       
       <br />
       <br />
-      {load &&<img src="https://media.tenor.com/v_OKGJFSkOQAAAAC/loading-gif.gif" style={{
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0}}></img>}
+      {load &&<img src="https://media.tenor.com/v_OKGJFSkOQAAAAC/loading-gif.gif" ></img>}
       {offers &&<div className="first-container">
       
   {offers.map((timestamp, index) => (
     
-      <div key={index} style={{ display: currentTimestamp === index ? 'block' : 'none' }}>
+      <div key={index} style={{ display: currentTimestamp === index+1 ? 'block' : 'none' }}>
       <Card
       topic={timestamp.topic}
       timestamp={timestamp.timestamp}
@@ -164,11 +161,9 @@ const Player = () => {
   <label htmlFor="video-uploaded"  class="custom-button" >
     <div class="file-upload">
     <form onSubmit={handleSubmit}>
-      <form className='buttons'>
-      <input id="video-uploaded" type="file" accept="video/*" onChange={handleFileSelect} />
-      <br></br>
-      {/* <input id="submit-btn"type="submit" value="Upload File" placeholder=""/> */}
-      </form></form>
+    <input id="video-upload" type="file" accept="video/*" onChange={handleFileSelect} />
+      <i class="fa fa-arrow-up"></i>
+      <input type="submit" value="Upload File" /></form>
       
     </div>
   </label>
