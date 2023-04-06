@@ -163,14 +163,14 @@ const Player = () => {
     <form onSubmit={handleSubmit}>
     <input id="video-upload" type="file" accept="video/*" onChange={handleFileSelect} />
       <i class="fa fa-arrow-up"></i>
-      <input type="submit" value="Upload File" /></form>
+      <input id="upload-file" type="submit" value="Upload File" /></form>
       
     </div>
   </label>
   {isLoading && <Loader />}
 </div>
   
-      <Carousel responsive={responsive} style={{ width: '1000px' }} >
+      <Carousel responsive={responsive} style={{ width: '700px' }} >
      
       {offers &&<div className="timestamp-container" style={{ width: '1000px' }}>
         {offers.map((timestamp) => (
