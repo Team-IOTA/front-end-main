@@ -11,17 +11,25 @@ body {
 }
 
 #video-uploaded {
+  display: inline-block;
     background-color: #4d84e2;
     border: none; 
     color: white; 
     font-weight: bold;
     font-size: 16px;
-    padding: 12px 24px;
+    padding: 8px 16px;
+    padding-right: 4px;
     text-align: center; 
     text-decoration: none; 
     border-radius: 25px;
   }
+
+  #video-uploaded::file-selector-button {
+    display: none;
+  }
+/* 
   #submit-btn {
+    display: inline-block;
     background-color: #4d84e2;
     border: none; 
     color: white; 
@@ -31,7 +39,7 @@ body {
     text-align: center; 
     text-decoration: none; 
     border-radius: 25px;
-  }
+  } */
   .timestamp-container {
     display: flex;
     flex-direction: row;
@@ -130,3 +138,5 @@ body {
 .fisrt-container:first-child{
 margin-right: 20px;
 }
+
+

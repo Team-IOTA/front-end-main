@@ -47,7 +47,7 @@ const Player = () => {
     try {
       const response = await axios({
         method: "post",
-        url: "http://411d-2402-4000-2381-9586-b8fe-7fcc-8454-b32b.in.ngrok.io/api/getVideo",
+        url: "http://localhost:8088/api/getVideo",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -137,7 +137,12 @@ const Player = () => {
       
       <br />
       <br />
-      {load &&<img src="https://media.tenor.com/v_OKGJFSkOQAAAAC/loading-gif.gif" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}></img>}
+      {load &&<img src="https://media.tenor.com/v_OKGJFSkOQAAAAC/loading-gif.gif" style={{
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0}}></img>}
       {offers &&<div className="first-container">
       
   {offers.map((timestamp, index) => (
@@ -156,13 +161,13 @@ const Player = () => {
 </div> 
       <br />
       <div class="wrapper">
-  <label htmlFor="video-upload" >
+  <label htmlFor="video-uploaded"  class="custom-button" >
     <div class="file-upload">
     <form onSubmit={handleSubmit}>
       <form className='buttons'>
       <input id="video-uploaded" type="file" accept="video/*" onChange={handleFileSelect} />
       <br></br>
-      <input id="submit-btn"type="submit" value="Upload File" placeholder=""/>
+      {/* <input id="submit-btn"type="submit" value="Upload File" placeholder=""/> */}
       </form></form>
       
     </div>
@@ -174,7 +179,7 @@ const Player = () => {
      
       {offers &&<div className="timestamp-container" style={{ width: '1000px' }}>
         {offers.map((timestamp) => (
-          <div className="timestamp-item" key={timestamp.timestamp} style={{ width: '50px' }}>
+          <div className="timestamp-item" key={timestamp.timestamp} >
             
             <img
   src={`/${timestamp.image}`}
