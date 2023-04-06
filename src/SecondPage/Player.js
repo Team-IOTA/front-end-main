@@ -6,8 +6,9 @@ import Loader from './Loader';
 import axios from 'axios';
 
 const Card = (props) => {
+  const isVisible = props.timeInSeconds <= currentTime && props.timeInSeconds + 10 > currentTime;
   return (
-    <div className="card">
+    <div className="card" style={{ display: isVisible ? 'block' : 'none' }}>
       <div className="card-content">
         <h2 className="card-title">{props.topic}</h2>
         <p className="card-timestamp">{props.timestamp}</p>
@@ -170,7 +171,7 @@ const Player = () => {
   {isLoading && <Loader />}
 </div>
   
-      <Carousel responsive={responsive} style={{ width: '700px' }} >
+      <Carousel responsive={responsive} style={{ width: '700px' }} infinite={false} draggable={true}>
      
       {offers &&<div className="timestamp-container" style={{ width: '1000px' }}>
         {offers.map((timestamp) => (
