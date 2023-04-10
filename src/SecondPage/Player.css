@@ -1,8 +1,9 @@
 body {
   background: linear-gradient(to bottom, #04befe, #ffffff);
 }
-
-
+.card-content {
+  overflow: auto;
+}
 
 .player {
   margin-right: -30px;
@@ -106,7 +107,6 @@ body {
   margin-top: -2px;
   margin-left: 100px;
   margin-top: -30px;
-  overflow: scroll;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 

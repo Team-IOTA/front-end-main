@@ -15,7 +15,6 @@ function App() {
   });
   
   const [name, setName] = useState("");
-  
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

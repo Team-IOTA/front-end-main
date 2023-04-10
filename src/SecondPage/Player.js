@@ -47,7 +47,7 @@ const Player = () => {
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:8088/api/getVideo",
+        url: "http://localhost:8080/api/getVideo",
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -100,7 +100,7 @@ const Player = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 4
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -158,19 +158,19 @@ const Player = () => {
 </div> 
       <br />
       <div class="wrapper">
-  <label htmlFor="video-uploaded"  class="custom-button" >
-    <div class="file-upload">
-    <form onSubmit={handleSubmit}>
+  <div class="file-upload">
     <input id="video-upload" type="file" accept="video/*" onChange={handleFileSelect} />
-      <i class="fa fa-arrow-up"></i>
-      <input type="submit" value="Upload File" /></form>
-      
-    </div>
-  </label>
+    <label htmlFor="video-upload" class="custom-button">
+    </label>
+  </div>
+  <div class="submit-button">
+    <input type="submit" value="Submit" onClick={handleSubmit} />
+  </div>
   {isLoading && <Loader />}
 </div>
+
   
-      <Carousel responsive={responsive} style={{ width: '1000px' }} >
+      <Carousel responsive={responsive} style={{ width: '800px' }} >
      
       {offers &&<div className="timestamp-container" style={{ width: '1000px' }}>
         {offers.map((timestamp) => (
